@@ -1,1 +1,1 @@
-worker: python3.6 pointsbot.py
+worker: python3.6 points bot.py
