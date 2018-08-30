@@ -230,5 +230,5 @@ class BotClient(discord.Client):
 
 
 client = BotClient()
-client.login(process.env.BOT_TOKEN)
+bot.run(str(os.environ.get('BOT_TOKEN')))
 client.run("NDc2NzkwOTc2NzAzMTAyOTg2.DmlWtQ.HcxOGrpi4ZlVyliNpfSLV7zZFzw")
