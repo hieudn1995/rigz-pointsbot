@@ -75,7 +75,7 @@ class BotClient(discord.Client):
         return False
 
 
-    async def prefix(message, stripped):
+    async def prefix(self, message, stripped):
         if message.author.guild_permissions.administrator:
             if len(stripped) > 0:
                 with open('/prefix', 'w') as f:
