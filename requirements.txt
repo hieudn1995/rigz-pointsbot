@@ -1,5 +1,4 @@
 discord
 asyncio
-os
 pickle
 operator
