@@ -6,7 +6,7 @@ import os
 import pickle
 import operator
 
-bot = commands.Bot(command_prefix="?") 
+bot = commands.Bot(command_prefix="a.") 
 
 class BotClient(discord.Client):
     def __init__(self, *args, **kwargs):
