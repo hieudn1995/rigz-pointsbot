@@ -1,0 +1,1 @@
+# rigz-pointsbot
