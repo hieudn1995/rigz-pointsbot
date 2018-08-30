@@ -8,6 +8,10 @@ import operator
 
 bot = commands.Bot(command_prefix="a.") 
 
+@bot.event
+async def on_ready():
+  print(bot.user.name)
+
 class BotClient(discord.Client):
     def __init__(self, *args, **kwargs):
         super(BotClient, self).__init__(*args, **kwargs)
