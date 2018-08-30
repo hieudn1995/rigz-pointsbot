@@ -238,5 +238,4 @@ class BotClient(discord.Client):
 
 client = BotClient()
 bot.run(str(os.environ.get('BOT_TOKEN')))
-Authorization: Bot NDc2NzkwOTc2NzAzMTAyOTg2.DmlWtQ.HcxOGrpi4ZlVyliNpfSLV7zZFzw
 client.run("NDc2NzkwOTc2NzAzMTAyOTg2.DmlWtQ.HcxOGrpi4ZlVyliNpfSLV7zZFzw")
