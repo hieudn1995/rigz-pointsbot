@@ -47,14 +47,14 @@ class BotClient(discord.Client):
 
 
     async def on_guild_join(self, guild):
-        ## os.mkdir('data/' + str(guild.id))
-        with open('/prefix', 'w') as f:
+        os.mkdir('data/' + str(guild.id))
+        with open('data/' + str(guild.id) + '/prefix', 'w') as f:
             f.write('!')
         dict = {}
-        pve =  open('/pve.pickle', 'wb')
+        pve =  open('data/'+ str(guild.id) + '/pve.pickle', 'wb')
         pickle.dump(dict, pve)
         pve.close()
-        pvp =  open('/pvp.pickle', 'wb')
+        pvp =  open('data/'+ str(guild.id) + '/pvp.pickle', 'wb')
         pickle.dump(dict, pvp)
         pvp.close()
 
@@ -64,7 +64,7 @@ class BotClient(discord.Client):
 
 
     async def getCommand(self, message):
-        with open('/prefix', 'r') as f:
+        with open('data/' + str(message.guild.id) + '/prefix', 'r') as f:
             self.prefix = f.read()
         if message.content[0:len(self.prefix)] == self.prefix:
             command = (message.content + ' ')[len(self.prefix):message.content.find(' ')]
@@ -78,7 +78,7 @@ class BotClient(discord.Client):
     async def prefix(self, message, stripped):
         if message.author.guild_permissions.administrator:
             if len(stripped) > 0:
-                with open('/prefix', 'w') as f:
+                with open('data/' + str(message.guild.id) + '/prefix', 'w') as f:
                     f.write(stripped)
                 embed = discord.Embed(description='Your prefix has been changed to: ' + str(stripped), color=self.colours['server'])
                 await message.channel.send(embed=embed)
@@ -90,7 +90,7 @@ class BotClient(discord.Client):
     async def add(self, message, stripped):
         if message.author.guild_permissions.administrator:
             async def _add(points, members, type):
-                    pickleIn =  open('/{}.pickle'.format(type), 'rb')
+                    pickleIn =  open('data/' + str(message.guild.id) + '/{}.pickle'.format(type), 'rb')
                     ladder = pickle.load(pickleIn)
                     pickleIn.close()
                     for n in members:
@@ -101,7 +101,7 @@ class BotClient(discord.Client):
                             ladder[n] = int(check) + int(points)
                         await message.channel.send(embed=discord.Embed(description='Member: <@' + str(n) + '> was on ' + str(check) + ' points and is now on ' + str(ladder[n]) + ' points.', color=self.colours['server']))
 
-                    pickleSave =  open('/{}.pickle'.format(type), 'wb')
+                    pickleSave =  open('data/'+ str(message.guild.id) + '/{}.pickle'.format(type), 'wb')
                     pickle.dump(ladder, pickleSave)
                     pickleSave.close()
 
@@ -126,7 +126,7 @@ class BotClient(discord.Client):
     async def remove(self, message, stripped):
         if message.author.guild_permissions.administrator:
             async def _remove(points, members, type):
-                    pickleIn =  open('/{}.pickle'.format(type), 'rb')
+                    pickleIn =  open('data/' + str(message.guild.id) + '/{}.pickle'.format(type), 'rb')
                     ladder = pickle.load(pickleIn)
                     pickleIn.close()
                     for n in members:
@@ -143,7 +143,7 @@ class BotClient(discord.Client):
                                 ladder[n] = int(newPoints)
                         await message.channel.send(embed=discord.Embed(description='Member: <@' + str(n) + '> was on ' + str(check) + ' points and is now on ' + str(ladder[n]) + ' points.', color=self.colours['server']))
 
-                    pickleSave =  open('/{}.pickle'.format(type), 'wb')
+                    pickleSave =  open('data/'+ str(message.guild.id) + '/{}.pickle'.format(type), 'wb')
                     pickle.dump(ladder, pickleSave)
                     pickleSave.close()
 
@@ -167,7 +167,7 @@ class BotClient(discord.Client):
 
     async def view(self, message, stripped):
         async def _view(type):
-            pickleIn =  open('/{}.pickle'.format(type), 'rb')
+            pickleIn =  open('data/' + str(message.guild.id) + '/{}.pickle'.format(type), 'rb')
             ladder = pickle.load(pickleIn)
             pickleIn.close()
 
@@ -199,10 +199,10 @@ class BotClient(discord.Client):
             await _view(type)
         elif stripped == '':
             userId = message.author.id
-            pickleIn =  open('/pvp.pickle', 'rb')
+            pickleIn =  open('data/' + str(message.guild.id) + '/pvp.pickle', 'rb')
             pvpLadder = pickle.load(pickleIn)
             pickleIn.close()
-            pickleIn =  open('/pve.pickle', 'rb')
+            pickleIn =  open('data/' + str(message.guild.id) + '/pve.pickle', 'rb')
             pveLadder = pickle.load(pickleIn)
             pickleIn.close()
             pvpCheck = pvpLadder.get(userId, 0)
