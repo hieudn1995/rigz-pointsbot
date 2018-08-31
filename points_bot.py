@@ -16,7 +16,7 @@ class BotClient(discord.Client):
     def __init__(self, *args, **kwargs):
         super(BotClient, self).__init__(*args, **kwargs)
         self.commands = {
-            'prefix' : self.prefix,
+            ##'prefix' : self.prefix,
             'ping' : self.ping,
             'add' : self.add,
             'remove' : self.remove,
