@@ -1,10 +1,11 @@
 import discord
 from discord.ext import commands
-from discord.ext.commands import Bot
 import asyncio
 import os
 import pickle
 import operator
+
+bot = commands.Bot(command_prefix='$')
 
 @bot.event
 async def on_ready():
