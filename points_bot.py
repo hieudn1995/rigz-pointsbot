@@ -9,8 +9,6 @@ bot = commands.Bot(command_prefix='?')
 @bot.event
 async def on_ready():
   print(bot.user.name)
-  
-@bot.command(bot)
 
 class BotClient(discord.Client):
     def __init__(self, *args, **kwargs):
