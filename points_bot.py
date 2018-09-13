@@ -4,9 +4,9 @@ import os
 import pickle
 import operator
 
-##bot = command.Bot(command_prefix='?')
+bot = command.Bot(command_prefix='a.')
 
-@bot.event
+@client.event
 async def on_ready():
   print(bot.user.name)
 
