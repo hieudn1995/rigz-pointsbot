@@ -4,7 +4,7 @@ import os
 import pickle
 import operator
 
-bot = command.Bot(command_prefix='?')
+##bot = command.Bot(command_prefix='?')
 
 @bot.event
 async def on_ready():
